@@ -1,8 +1,10 @@
+PROJETO ACADÊMICO DA FACULDADE REFERENTE À MATÉRIA DE SOFTWARE PRODUCT
+
 # Gestão de Doações
 
 ## Descrição
 
-A aplicação "Gestão de Doações" é uma solução desenvolvida para gerenciar e organizar doações para um projeto acadêmico da faculdade referente à matéria de Software Product. O objetivo principal é facilitar o acompanhamento e a administração das doações recebidas, oferecendo uma interface intuitiva para os usuários e funcionalidades para gerenciar dados de doações.
+A aplicação "Gestão de Doações" é uma solução desenvolvida para gerenciar e organizar doações. O objetivo principal é facilitar o acompanhamento e a administração das doações recebidas, oferecendo uma interface intuitiva para os usuários e funcionalidades para gerenciar dados de doações.
 
 ## Funcionalidades
 
