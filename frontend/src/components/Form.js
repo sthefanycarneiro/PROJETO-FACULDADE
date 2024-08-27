@@ -12,11 +12,15 @@ const FormContainer = styled.form`
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
+  justify-content: center; /* Centraliza os itens horizontalmente */
 `;
 
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centraliza os itens dentro do InputArea */
+  text-align: center; /* Centraliza o texto do Label */
+  margin-bottom: 10px; /* Adiciona um espaço entre os campos */
 `;
 
 const Input = styled.input`
@@ -25,6 +29,16 @@ const Input = styled.input`
   border: 1px solid #bbb;
   border-radius: 5px;
   height: 40px;
+  margin: 0 auto; /* Centraliza horizontalmente dentro do InputArea */
+`;
+
+const InputItem = styled.input`
+  width: 500px;
+  padding: 0 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  height: 40px;
+  margin: 0 auto; /* Centraliza horizontalmente dentro do InputArea */
 `;
 
 const Label = styled.label``;
@@ -37,6 +51,8 @@ const Button = styled.button`
   background-color: #2c73d2;
   color: white;
   height: 42px;
+  margin-top: 10px; /* Adiciona um espaço acima do botão */
+  align-self: center; /* Centraliza o botão dentro do FormContainer */
 `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
@@ -50,6 +66,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       user.email.value = onEdit.email;
       user.fone.value = onEdit.fone;
       user.data_nascimento.value = onEdit.data_nascimento;
+      user.item.value = onEdit.item;
     }
   }, [onEdit]);
 
@@ -62,7 +79,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       !user.nome.value ||
       !user.email.value ||
       !user.fone.value ||
-      !user.data_nascimento.value
+      !user.data_nascimento.value ||
+      !user.item.value
     ) {
       return toast.warn("Preencha todos os campos!");
     }
@@ -74,6 +92,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           email: user.email.value,
           fone: user.fone.value,
           data_nascimento: user.data_nascimento.value,
+          item: user.item.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -84,6 +103,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           email: user.email.value,
           fone: user.fone.value,
           data_nascimento: user.data_nascimento.value,
+          item: user.item.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -93,6 +113,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     user.email.value = "";
     user.fone.value = "";
     user.data_nascimento.value = "";
+    user.item.value = "";
 
     setOnEdit(null);
     getUsers();
@@ -101,7 +122,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Nome</Label>
+        <Label>Responsável</Label>
         <Input name="nome" />
       </InputArea>
       <InputArea>
@@ -116,7 +137,10 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Data de Nascimento</Label>
         <Input name="data_nascimento" type="date" />
       </InputArea>
-
+      <InputArea>
+        <Label>Item de doação</Label>
+        <InputItem name="item"/>
+      </InputArea>
       <Button type="submit">SALVAR</Button>
     </FormContainer>
   );
