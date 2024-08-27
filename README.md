@@ -12,12 +12,14 @@ A aplicação "Gestão de Doações" é uma solução desenvolvida para gerencia
 - **Cadastro de Doadores:** Permite o registro de informações sobre os doadores.
 - **Gerenciamento de Doações:** Facilita o registro, edição e visualização das doações recebidas.
 
-~ Segunda Entrega
-- **Quantidade de doadores:** Faz um somatório de quantos doadores contribuiram.
+~ Segunda Entregar
 - **ComboList:** Apresenta uma lista de itens para doação.
 
 ~ Terceira Entrega
 - **Filtros:** Oferece opções para filtrar e buscar informações específicas nas doações e doadores.
+
+~ Quarta Entrega
+- **Quantidade de doadores:** Faz um somatório de quantos doadores contribuiram.
 
 ## Tecnologias Utilizadas
 
