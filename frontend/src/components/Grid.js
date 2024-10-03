@@ -26,6 +26,8 @@ export const Th = styled.th`
   border-bottom: inset;
   padding-bottom: 5px;
 
+  svg {cursor: pointer;}
+
   @media (max-width: 500px) {
     ${(props) => props.onlyWeb && "display: none"}
   }
@@ -36,6 +38,8 @@ export const Td = styled.td`
   text-align: ${(props) => (props.alignCenter ? "center" : "start")};
   width: ${(props) => (props.width ? props.width : "auto")};
 
+  svg {cursor: pointer;}
+  
   @media (max-width: 500px) {
     ${(props) => props.onlyWeb && "display: none"}
   }
