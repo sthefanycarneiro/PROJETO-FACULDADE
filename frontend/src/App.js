@@ -1,4 +1,4 @@
-// frontend/src/App.js
+
 import GlobalStyle from "./styles/global";
 import styled from "styled-components";
 import Form from "./components/Form.js";

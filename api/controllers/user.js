@@ -1,9 +1,9 @@
-// api/controllers/user.js
+
 import { db } from "../db.js";
-import bcrypt from "bcryptjs"; // Alterado de 'bcrypt' para 'bcryptjs'
+import bcrypt from "bcryptjs"; 
 import jwt from "jsonwebtoken";
 
-// Chave secreta para JWT (em um ambiente de produção, armazene isso de forma segura)
+// Chave secreta para JWT 
 const JWT_SECRET = "sua_chave_secreta";
 
 export const getUsers = (req, res) => {
@@ -153,7 +153,7 @@ export const login = (req, res) => {
 
     res.cookie("access_token", token, {
       httpOnly: true,
-      // secure: true, // Use em produção com HTTPS
+
     })
     .status(200)
     .json(other);
