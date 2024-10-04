@@ -57,11 +57,12 @@ const Login = () => {
         password,
       });
 
-      const token = res.data.token || res.data.access_token; // Ajuste conforme a resposta do backend
+      const token = res.data.token || res.data.access_token; 
       login(res.data, token);
       toast.success("Login realizado com sucesso!");
       navigate("/");
     } catch (error) {
+      window.alert("Login falhou! Caso não tenha uma conta, cadastre-se.");
       toast.error(
         error.response?.data?.message || "Erro ao realizar o login."
       );
