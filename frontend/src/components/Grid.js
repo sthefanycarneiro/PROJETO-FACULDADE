@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Table = styled.table`
   width: 100%;
@@ -39,29 +40,39 @@ export const Td = styled.td`
   width: ${(props) => (props.width ? props.width : "auto")};
 
   svg {cursor: pointer;}
-  
+
   @media (max-width: 500px) {
     ${(props) => props.onlyWeb && "display: none"}
   }
 `;
 
 const Grid = ({ users, setUsers, setOnEdit }) => {
+  const { user } = useContext(AuthContext);
+  const token = localStorage.getItem("token");
+
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
   const handleDelete = async (id) => {
-    await axios
-      .delete("http://localhost:8800/" + id)
-      .then(({ data }) => {
-        const newArray = users.filter((user) => user.id !== id);
-
-        setUsers(newArray);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
-
-    setOnEdit(null);
+    if (window.confirm("Tem certeza que deseja deletar este usuário?")) {
+      try {
+        await axios.delete(`http://localhost:8800/api/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then(({ data }) => {
+            const newArray = users.filter((user) => user.id !== id);
+            setUsers(newArray);
+            toast.success(data);
+          })
+          .catch(({ data }) => toast.error(data));
+        setOnEdit(null);
+      } catch (error) {
+        toast.error("Erro ao deletar o usuário.");
+      }
+    }
   };
 
   return (

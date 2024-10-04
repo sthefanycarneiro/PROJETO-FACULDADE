@@ -1,14 +1,24 @@
+// api/routes/users.js
 import express from "express";
-import { addUser, deleteUser, getUsers, updateUser } from "../controllers/user.js";
+import {
+  addUser,
+  deleteUser,
+  getUsers,
+  updateUser,
+  register,
+  login,
+} from "../controllers/user.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", getUsers)
+// Rotas de autenticação
+router.post("/register", register);
+router.post("/login", login);
 
-router.post("/", addUser)
+// Rotas protegidas
+router.get("/users", getUsers);
+router.post("/users", addUser);
+router.put("/users/:id", updateUser);
+router.delete("/users/:id", deleteUser);
 
-router.put("/:id", updateUser)
-
-router.delete("/:id", deleteUser)
-
-export default router
+export default router;
