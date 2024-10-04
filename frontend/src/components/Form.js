@@ -1,3 +1,4 @@
+// frontend\src\components\Form.js
 
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
@@ -58,6 +59,9 @@ const Button = styled.button`
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
+  
+  // Definindo o token a partir do localStorage
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (onEdit) {
@@ -74,50 +78,61 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = ref.current;
+    const userForm = ref.current;
 
     if (
-      !user.nome.value ||
-      !user.email.value ||
-      !user.fone.value ||
-      !user.data_nascimento.value ||
-      !user.item.value
+      !userForm.nome.value ||
+      !userForm.email.value ||
+      !userForm.fone.value ||
+      !userForm.data_nascimento.value ||
+      !userForm.item.value
     ) {
       return toast.warn("Preencha todos os campos!");
     }
 
-    if (onEdit) {
-      await axios
-        .put("http://localhost:8800/" + onEdit.id, {
-          nome: user.nome.value,
-          email: user.email.value,
-          fone: user.fone.value,
-          data_nascimento: user.data_nascimento.value,
-          item: user.item.value,
+    try {
+      if (onEdit) {
+        await axios.put(`http://localhost:8800/api/users/${onEdit.id}`, {
+          nome: userForm.nome.value,
+          email: userForm.email.value,
+          fone: userForm.fone.value,
+          data_nascimento: userForm.data_nascimento.value,
+          item: userForm.item.value,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
-    } else {
-      await axios
-        .post("http://localhost:8800", {
-          nome: user.nome.value,
-          email: user.email.value,
-          fone: user.fone.value,
-          data_nascimento: user.data_nascimento.value,
-          item: user.item.value,
+        .then(({ data }) => toast.success(data.message))
+        .catch(({ response }) => toast.error(response?.data?.message || "Erro ao atualizar usuário"));
+      } else {
+        await axios.post("http://localhost:8800/api/users", {
+          nome: userForm.nome.value,
+          email: userForm.email.value,
+          fone: userForm.fone.value,
+          data_nascimento: userForm.data_nascimento.value,
+          item: userForm.item.value,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
+        .then(({ data }) => toast.success(data.message))
+        .catch(({ response }) => toast.error(response?.data?.message || "Erro ao criar usuário"));
+      }
+
+      // Limpar os campos do formulário
+      userForm.nome.value = "";
+      userForm.email.value = "";
+      userForm.fone.value = "";
+      userForm.data_nascimento.value = "";
+      userForm.item.value = "";
+
+      setOnEdit(null);
+      getUsers();
+    } catch (error) {
+      toast.error("Erro ao processar a requisição.");
     }
-
-    user.nome.value = "";
-    user.email.value = "";
-    user.fone.value = "";
-    user.data_nascimento.value = "";
-    user.item.value = "";
-
-    setOnEdit(null);
-    getUsers();
   };
 
   return (

@@ -38,6 +38,7 @@ const Main = () => {
         },
       });
       setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
+      console.log("Usuários atualizados:", res.data);
     } catch (error) {
       toast.error("Erro ao obter usuários.");
     }
