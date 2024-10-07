@@ -3,7 +3,6 @@ import { db } from "../db.js";
 import bcrypt from "bcryptjs"; 
 import jwt from "jsonwebtoken";
 
-// Chave secreta para JWT 
 const JWT_SECRET = "sua_chave_secreta";
 
 export const getUsers = (req, res) => {
@@ -20,7 +19,6 @@ export const addUser = async (req, res) => {
     "INSERT INTO usuarios(`nome`, `email`, `fone`, `data_nascimento`, `item`, `password`) VALUES(?)";
 
   try {
-    // Hash da senha
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -51,7 +49,6 @@ export const addUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const { nome, email, fone, data_nascimento, item, password } = req.body;
 
-  // Se a senha estiver sendo atualizada, faça o hash
   let hashedPassword = null;
   if (password) {
     const salt = await bcrypt.genSalt(10);
