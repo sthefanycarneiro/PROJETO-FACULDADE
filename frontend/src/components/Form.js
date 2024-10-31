@@ -12,16 +12,16 @@ const FormContainer = styled.form`
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
-  border-radius: 5px;
-  justify-content: center; /* Centraliza os itens horizontalmente */
+  border-radius: 10px;
+  justify-content: center; 
 `;
 
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza os itens dentro do InputArea */
-  text-align: center; /* Centraliza o texto do Label */
-  margin-bottom: 10px; /* Adiciona um espaço entre os campos */
+  align-items: center; 
+  text-align: center; 
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -30,7 +30,7 @@ const Input = styled.input`
   border: 1px solid #bbb;
   border-radius: 5px;
   height: 40px;
-  margin: 0 auto; /* Centraliza horizontalmente dentro do InputArea */
+  margin: 0 auto; 
 `;
 
 const InputItem = styled.input`
@@ -39,7 +39,7 @@ const InputItem = styled.input`
   border: 1px solid #bbb;
   border-radius: 5px;
   height: 40px;
-  margin: 0 auto; /* Centraliza horizontalmente dentro do InputArea */
+  margin: 0 auto;
 `;
 
 const Label = styled.label``;
@@ -52,8 +52,8 @@ const Button = styled.button`
   background-color: #2c73d2;
   color: white;
   height: 42px;
-  margin-top: 10px; /* Adiciona um espaço acima do botão */
-  align-self: center; /* Centraliza o botão dentro do FormContainer */
+  margin-top: 10px; 
+  align-self: center; 
 `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {

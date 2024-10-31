@@ -5,13 +5,14 @@ import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/AuthContext";
+import DonorModal from "./DonorModal";
 
 const Table = styled.table`
   width: 100%;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   max-width: 1120px;
   margin: 20px auto;
   word-break: break-all;
@@ -76,7 +77,11 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
     }
   };
 
+  const totalDonors = users.filter((user) => user.item && user.item.trim() !== "").length;
+
   return (
+    <>
+    <DonorModal totalDonors={totalDonors} />
     <Table>
       <Thead>
         <Tr>
@@ -107,6 +112,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         ))}
       </Tbody>
     </Table>
+    </>
   );
 };
 
