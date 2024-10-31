@@ -17,15 +17,24 @@ const LoginContainer = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #bbb;
   border-radius: 5px;
 `;
 
-const Button = styled.button`
+const PageBackground = styled.div`
   width: 100%;
+  height: 100vh; /* Preenche toda a altura da tela */
+  background-color: #add8e6; /* Azul claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  width: 96%;
   padding: 10px;
   background-color: #2c73d2;
   color: white;
@@ -70,6 +79,7 @@ const Login = () => {
   };
 
   return (
+    <PageBackground>
     <LoginContainer>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -91,6 +101,7 @@ const Login = () => {
         Não possui uma conta? <Link to="/register">Cadastre-se</Link>
       </RegisterLink>
     </LoginContainer>
+    </PageBackground>
   );
 };
 

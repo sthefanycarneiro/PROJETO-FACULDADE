@@ -17,15 +17,24 @@ const RegisterContainer = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #bbb;
   border-radius: 5px;
 `;
 
-const Button = styled.button`
+const PageBackground = styled.div`
   width: 100%;
+  height: 100vh; /* Preenche toda a altura da tela */
+  background-color: #add8e6; /* Azul claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  width: 95%;
   padding: 10px;
   background-color: #2c73d2;
   color: white;
@@ -73,6 +82,7 @@ const Register = () => {
   };
 
   return (
+    <PageBackground>
     <RegisterContainer>
       <h2>Cadastro</h2>
       <form onSubmit={handleSubmit}>
@@ -112,6 +122,7 @@ const Register = () => {
         Já possui uma conta? <Link to="/login">Faça Login</Link>
       </LoginLink>
     </RegisterContainer>
+    </PageBackground>
   );
 };
 
