@@ -6,7 +6,14 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = "sua_chave_secreta";
 
 export const getUsers = (req, res) => {
-  const q = "SELECT id, nome, email, fone, data_nascimento, item FROM usuarios";
+  let q = "SELECT id, nome, email, fone, data_nascimento, item FROM usuarios WHERE 1=1";
+  
+  const { nome, email, fone, item } = req.query;
+
+  if (nome) q += ` AND nome LIKE '${nome}%'`; 
+  if (email) q += ` AND email LIKE '${email}%'`;
+  if (fone) q += ` AND fone LIKE '${fone}%'`;
+  if (item) q += ` AND item LIKE '${item}%'`;
 
   db.query(q, (err, data) => {
     if (err) return res.status(500).json(err);
