@@ -156,7 +156,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
               />
             </Th>
             <Th onlyWeb>
-              Fone
+              Telefone
               <InputFilter
                 type="text"
                 placeholder="Filtrar..."
