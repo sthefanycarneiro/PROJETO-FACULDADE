@@ -109,7 +109,6 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
     setUsers(filteredUsers);
   };
 
-
   const fetchFilteredUsers = async (filters) => {
     try {
       const queryParams = new URLSearchParams(filters).toString();
@@ -176,8 +175,9 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
                 onChange={handleFilterChange}
               />
             </Th>
-            <Th>Editar</Th>
-            <Th>Excluir</Th>
+            {/* Definindo uma largura fixa para as colunas de edição e exclusão */}
+            <Th style={{ width: "8%" }}>Editar</Th>
+            <Th style={{ width: "8%" }}>Excluir</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -188,7 +188,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
               <Td width="20%" onlyWeb>
                 {item.fone}
               </Td>
-              <Td width="20%">{item.item || "Não especificado"}</Td> {/* Tratamento do item opcional */}
+              <Td width="20%">{item.item || "Não especificado"}</Td> 
               <Td alignCenter width="8%">
                 <FaEdit onClick={() => handleEdit(item)} />
               </Td>
@@ -200,6 +200,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         </Tbody>
       </Table>
     </>
-  )};
+  );
+};
 
 export default Grid;
