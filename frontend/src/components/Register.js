@@ -119,7 +119,7 @@ const Register = () => {
           />
           <Input
             type="text"
-            placeholder="Item de Doação (opcional)"
+            placeholder="Item de Doação"
             value={item}
             onChange={(e) => setItem(e.target.value)} 
           />
