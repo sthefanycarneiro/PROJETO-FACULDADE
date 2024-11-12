@@ -103,6 +103,8 @@ export const register = async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+      const item = req.body.item || "default"; 
+
       const insertQuery =
         "INSERT INTO usuarios(`nome`, `email`, `fone`, `data_nascimento`, `item`, `password`) VALUES(?)";
 
@@ -111,7 +113,7 @@ export const register = async (req, res) => {
         req.body.email,
         req.body.fone,
         req.body.data_nascimento,
-        req.body.item || null,
+        item,  
         hashedPassword,
       ];
 
@@ -152,7 +154,6 @@ export const login = (req, res) => {
     // Gera o token JWT
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1h" });
 
-    // Remove a senha da resposta
     const { password, ...other } = user;
 
     res.cookie("access_token", token, {

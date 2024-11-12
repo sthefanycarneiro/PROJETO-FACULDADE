@@ -126,7 +126,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
       user.nome.toLowerCase().includes(filters.nome.toLowerCase()) &&
       user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
       user.fone.toLowerCase().includes(filters.fone.toLowerCase()) &&
-      user.item.toLowerCase().includes(filters.item.toLowerCase())
+      user.item?.toLowerCase().includes(filters.item.toLowerCase())
     );
   });
 
@@ -188,7 +188,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
               <Td width="20%" onlyWeb>
                 {item.fone}
               </Td>
-              <Td width="20%">{item.item}</Td>
+              <Td width="20%">{item.item || "Não especificado"}</Td> {/* Tratamento do item opcional */}
               <Td alignCenter width="8%">
                 <FaEdit onClick={() => handleEdit(item)} />
               </Td>
@@ -200,7 +200,6 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         </Tbody>
       </Table>
     </>
-  );
-};
+  )};
 
 export default Grid;

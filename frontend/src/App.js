@@ -1,4 +1,3 @@
-
 import GlobalStyle from "./styles/global";
 import styled from "styled-components";
 import Form from "./components/Form.js";
@@ -31,16 +30,10 @@ const Main = () => {
 
   const getUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8800/api/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
-      console.log("Usuários atualizados:", res.data);
+      const response = await axios.get("http://localhost:8800/api/users");
+      setUsers(response.data);
     } catch (error) {
-      toast.error("Erro ao obter usuários.");
+      console.error("Erro ao carregar os usuários:", error);
     }
   };
 
@@ -49,20 +42,18 @@ const Main = () => {
   }, []);
 
   return (
-    <>
-      <Container>
-        <Title>Gestão de Doações</Title>
-        <button onClick={logout}>Logout</button>
-        <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
-        <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
-      </Container>
+    <Container>
+      <Title>Gestão de Doações</Title>
+      <button onClick={logout}>Logout</button>
+      <Form getUsers={getUsers} onEdit={onEdit} setOnEdit={setOnEdit} />
+      <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
       <ToastContainer autoClose={3000} position="bottom-left" />
       <GlobalStyle />
-    </>
+    </Container>
   );
 };
 
-function App() {
+const App = () => {
   const { user } = useContext(AuthContext);
 
   return (
@@ -83,6 +74,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

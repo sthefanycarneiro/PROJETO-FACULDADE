@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
@@ -76,9 +75,10 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const userForm = ref.current;
-
+  
+    // Verificando se todos os campos foram preenchidos
     if (
       !userForm.nome.value ||
       !userForm.email.value ||
@@ -88,46 +88,42 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     ) {
       return toast.warn("Preencha todos os campos!");
     }
-
+  
     try {
       if (onEdit) {
+        // Atualização do usuário
         await axios.put(`http://localhost:8800/api/users/${onEdit.id}`, {
           nome: userForm.nome.value,
           email: userForm.email.value,
           fone: userForm.fone.value,
           data_nascimento: userForm.data_nascimento.value,
-          item: userForm.item.value,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
+          item: userForm.item.value, 
         })
         .then(({ data }) => toast.success(data.message))
         .catch(({ response }) => toast.error(response?.data?.message || "Erro ao atualizar usuário"));
       } else {
+        // Criação do novo usuário
         await axios.post("http://localhost:8800/api/users", {
           nome: userForm.nome.value,
           email: userForm.email.value,
           fone: userForm.fone.value,
           data_nascimento: userForm.data_nascimento.value,
-          item: userForm.item.value,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
+          item: userForm.item.value, 
         })
         .then(({ data }) => toast.success(data.message))
         .catch(({ response }) => toast.error(response?.data?.message || "Erro ao criar usuário"));
       }
-
+  
       // Limpar os campos do formulário
       userForm.nome.value = "";
       userForm.email.value = "";
       userForm.fone.value = "";
       userForm.data_nascimento.value = "";
       userForm.item.value = "";
-
+  
       setOnEdit(null);
+  
+      // Após salvar, recarregar a lista de usuários
       getUsers();
     } catch (error) {
       toast.error("Erro ao processar a requisição.");

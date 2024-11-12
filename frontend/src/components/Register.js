@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -54,6 +53,7 @@ const Register = () => {
   const [fone, setFone] = useState("");
   const [data_nascimento, setDataNascimento] = useState("");
   const [password, setPassword] = useState("");
+  const [item, setItem] = useState(""); 
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -69,6 +69,7 @@ const Register = () => {
         email,
         fone,
         data_nascimento,
+        item, 
         password,
       });
 
@@ -83,45 +84,51 @@ const Register = () => {
 
   return (
     <PageBackground>
-    <RegisterContainer>
-      <h2>Cadastro</h2>
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          placeholder="Nome Completo"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-        <Input
-          type="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="Telefone"
-          value={fone}
-          onChange={(e) => setFone(e.target.value)}
-        />
-        <Input
-          type="date"
-          placeholder="Data de Nascimento"
-          value={data_nascimento}
-          onChange={(e) => setDataNascimento(e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit">Cadastrar</Button>
-      </form>
-      <LoginLink>
-        Já possui uma conta? <Link to="/login">Faça Login</Link>
-      </LoginLink>
-    </RegisterContainer>
+      <RegisterContainer>
+        <h2>Cadastro</h2>
+        <form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder="Nome Completo"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Telefone"
+            value={fone}
+            onChange={(e) => setFone(e.target.value)}
+          />
+          <Input
+            type="date"
+            placeholder="Data de Nascimento"
+            value={data_nascimento}
+            onChange={(e) => setDataNascimento(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Item de Doação (opcional)"
+            value={item}
+            onChange={(e) => setItem(e.target.value)} 
+          />
+          <Button type="submit">Cadastrar</Button>
+        </form>
+        <LoginLink>
+          Já possui uma conta? <Link to="/login">Faça Login</Link>
+        </LoginLink>
+      </RegisterContainer>
     </PageBackground>
   );
 };
